@@ -273,11 +273,14 @@
     // See the chat instructions for exact code to paste here.
     var key = RSVP_KEY_PREFIX + email.toLowerCase();
     try {
-      await dataStore.set(key, await fetch("https://formspree.io/f/mdarvnvn", {
+      await dataStore.set(key, JSON.stringify(data));await fetch("https://formspree.io/f/abc123", {
      method: "POST",
      headers: { "Content-Type": "application/json", Accept: "application/json" },
      body: JSON.stringify(data)
    });
+    } catch (err) {
+      console.error("Could not save RSVP", err);
+    }
 
     if (data.attending === "yes") {
       successTitle.textContent = "Thank You, " + name.split(" ")[0] + "!";
